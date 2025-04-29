@@ -148,6 +148,9 @@ get_network_usage() {
     # 获取总流量
     rx_bytes=$(cat /proc/net/dev | grep "$interface" | awk '{print $2}')
     tx_bytes=$(cat /proc/net/dev | grep "$interface" | awk '{print $10}')
+    # 获取总流量 - 使用精确匹配确保只获取eth0的数据
+    # rx_bytes=$(cat /proc/net/dev | grep "^\s*eth0:" | awk '{print $2}')
+    # tx_bytes=$(cat /proc/net/dev | grep "^\s*eth0:" | awk '{print $10}')
     
     echo "{\"upload_speed\":$upload_speed,\"download_speed\":$download_speed,\"total_upload\":$tx_bytes,\"total_download\":$rx_bytes}"
 }
