@@ -161,6 +161,9 @@ report_metrics() {
     network=$(get_network_usage)
     
     data="{\"timestamp\":$timestamp,\"cpu\":$cpu,\"memory\":$memory,\"disk\":$disk,\"network\":$network}"
+
+    # 确保JSON格式正确 - 将换行符移除
+    data=$(echo "$data" | tr -d '\n' | tr -d '\r')
     
     log "正在上报数据..."
     
